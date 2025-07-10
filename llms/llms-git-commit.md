@@ -78,6 +78,7 @@ STRICT RULES:
    - Co-authors: "Co-authored-by: Name <email>"
 
 VALIDATION CHECKLIST:
+
 - [ ] Gitmoji matches the type of change
 - [ ] Conventional type is correct
 - [ ] Scope is lowercase and relevant

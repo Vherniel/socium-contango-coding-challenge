@@ -1,21 +1,22 @@
 {
-  "name": "shadcn-ui-monorepo",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "@repo/config-eslint": "workspace:*",
-    "@repo/config-typescript": "workspace:*",
-    "prettier": "^3.6.2",
-    "turbo": "^2.5.4",
-    "typescript": "5.7.3"
-  },
-  "engines": {
-    "node": ">=24"
-  }
+	"name": "shadcn-ui-monorepo",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "turbo lint",
+		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,css,yml,yaml,json}\""
+	},
+	"devDependencies": {
+		"@repo/config-eslint": "workspace:*",
+		"@repo/config-typescript": "workspace:*",
+		"prettier": "^3.6.2",
+		"prettier-plugin-tailwindcss": "^0.6.14",
+		"turbo": "^2.5.4",
+		"typescript": "5.7.3"
+	},
+	"engines": {
+		"node": ">=24"
+	}
 }
