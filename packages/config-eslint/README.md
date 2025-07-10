@@ -1,3 +1,3 @@
-# `@workspace/eslint-config`
+# `@repo/config-eslint`
 
 Shared eslint configuration for the workspace.
