@@ -3,6 +3,11 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"build:swetest-wasm": "node ./scripts/build-swetest-wasm.ts",
+		"clean:swetest-wasm": "rimraf ./build/swetest*",
+		"clean:all": "pnpm clean:swetest-wasm && turbo clean",
+		"build:all": "pnpm build:swetest-wasm && turbo build",
+		"clean": "turbo clean",
 		"build": "turbo build",
 		"dev": "turbo dev",
 		"lint": "turbo lint",
@@ -13,6 +18,7 @@
 		"@repo/config-typescript": "workspace:*",
 		"prettier": "^3.6.2",
 		"prettier-plugin-tailwindcss": "^0.6.14",
+		"rimraf": "^6.0.1",
 		"turbo": "^2.5.5",
 		"typescript": "^5.8.3"
 	},
