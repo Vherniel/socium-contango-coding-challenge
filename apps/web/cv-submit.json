@@ -1,0 +1,75 @@
+{
+	"nodes": [
+		{
+			"parameters": {
+				"httpMethod": "POST",
+				"path": "cv-submit",
+				"responseMode": "lastNode"
+			},
+			"id": "Webhook",
+			"name": "Webhook",
+			"type": "n8n-nodes-base.webhook",
+			"typeVersion": 1,
+			"position": [200, 300]
+		},
+		{
+			"parameters": {
+				"functionCode": "const input = items[0].json.body || {};\nconst pdfRaw = input.pdf || \"\";\n\nconst base64 = pdfRaw.includes(\",\") ? pdfRaw.split(\",\")[1] : pdfRaw;\nconst buffer = Buffer.from(base64, \"base64\");\n\nreturn [\n  {\n    binary: {\n      data: {\n        data: buffer.toString(\"base64\"),\n        mimeType: \"application/pdf\",\n        fileName: \"cv.pdf\"\n      }\n    },\n    json: {\n      name: input.name || null,\n      email: input.email || null,\n      phone: input.phone || null,\n      skills: input.skills || [],\n      experience: input.experience || null\n    }\n  }\n];"
+			},
+			"id": "Decode Base64",
+			"name": "Decode Base64",
+			"type": "n8n-nodes-base.function",
+			"typeVersion": 1,
+			"position": [400, 300]
+		},
+		{
+			"parameters": {
+				"options": {}
+			},
+			"id": "Read PDF",
+			"name": "Read PDF",
+			"type": "n8n-nodes-base.readPDF",
+			"typeVersion": 1,
+			"position": [600, 300]
+		},
+		{
+			"parameters": {
+				"functionCode": "const parsedText = items[0].json.text || \"\";\n\nreturn [{ json: { text: parsedText } }];"
+			},
+			"id": "Compare with Input",
+			"name": "Compare with Input",
+			"type": "n8n-nodes-base.function",
+			"typeVersion": 1,
+			"position": [800, 300]
+		},
+		{
+			"parameters": {
+				"responseData": "={{ $json }}",
+				"responseCode": 200
+			},
+			"id": "Respond",
+			"name": "Respond to Webhook",
+			"type": "n8n-nodes-base.respondToWebhook",
+			"typeVersion": 1.5,
+			"position": [1000, 300]
+		}
+	],
+	"connections": {
+		"Webhook": {
+			"main": [["Decode Base64"]]
+		},
+		"Decode Base64": {
+			"main": [["Read PDF"]]
+		},
+		"Read PDF": {
+			"main": [["Compare with Input"]]
+		},
+		"Compare with Input": {
+			"main": [["Respond"]]
+		}
+	},
+	"active": true,
+	"settings": {},
+	"name": "CV Parser via Webhook",
+	"tags": []
+}
