@@ -1,4 +1,4 @@
-# Socium Contago Coding Challenge
+# Socium Contango Coding Challenge
 
 **Submitted by:** Vherniel Lebis (Applicant)
 
